@@ -1,0 +1,336 @@
+.account {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.account-container{
+  position: relative;
+  width: 100%;
+  background-color: #E4E9F7;
+  min-height: 100vh;
+  overflow: hidden;
+  // display: grid;
+
+  .account-top {
+    display: flex;
+    position: relative;
+    width: 24%;
+    padding: 6px;
+    margin: 5%;
+    background-color: #1d1b31;
+    border-radius: 45px;
+    justify-content: baseline;
+    .account-info-img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      align-self: center;
+      margin-left: 5px;
+      margin-right: 15px;
+    }
+      
+    .account-top-title {
+      color: #fff;
+      font-weight: 500;
+      font-size: 20px;
+    }
+
+  }
+
+  .account-bottom {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 75%;
+    // padding: 20px;
+    margin: 5%;
+    // -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    // box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    // background-color: #1d1b31;
+    border-radius: 45px;
+
+   .account-bottom-items{
+      width: 33%;
+      flex-shrink: 0;
+      color: #1d1b31;
+
+   }
+   .account-bottom-items2{
+      color: #5c5c5c;
+   }
+   .account-bottom-items-d{
+    color: red;
+    }
+    .account-bottom-items-detail{
+      font-size: 13px;
+      padding-left: 20px;
+      flex-shrink: 0;
+      color: #1d1b31;
+
+      }
+    .account-delete-button{
+      height: 28px;
+      margin-left: 3%;
+      margin-top: 20px;
+      padding: 5px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: red;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+    }
+  
+    .changepas-forms{
+      display: flex;
+      align-items: left;
+      justify-content: center;
+      flex-direction: column;
+      padding: 1rem 2rem;
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+
+
+      .changepas-field{
+        max-width: 380px;
+        width: 100%;
+        background-color: #E4E9F7;
+        margin: 10px 0;
+        height: 45px;
+        border-radius: 5px;
+        display: grid;
+        grid-template-columns: 15% 70% 15%;
+        padding: 0 0.4rem;
+        position: relative;
+
+        .icon-pas{
+          margin: 10px 10px;
+          line-height: 55px;
+          color: #1d1b31;
+        }
+
+        .icon-show-pass{
+          background: none;
+          border: none;
+          height: 45px;
+          line-height: 55px;
+          color: #1d1b31;
+          cursor: pointer;
+        }
+        
+        input{
+          background: none;
+          outline: none;
+          border: none;
+          line-height: 1;
+          font-weight: 600;
+          font-size: 1.1rem;
+          color: #333;
+        }
+        input::placeholder{
+          color: #aaa;
+          font-weight: 400;
+          font-size: 16px;
+        }
+      }
+      .btn-changepas{
+        width: 100px;
+        background-color: #1d1b31;
+        border: none;
+        outline: none;
+        height: 30px;
+        border-radius: 49px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin: 10px 0;
+        cursor: pointer;
+      }
+      .btn-changepas::hover{
+        background-color: #516c99;
+      }
+    }
+
+    .report-forms{
+      display: flex;
+      align-items: left;
+      justify-content: center;
+      flex-direction: column;
+      padding: 1rem 2rem;
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+
+
+      .report-field{
+        // max-width: 380px;
+        width: 100%;
+        background-color: #E4E9F7;
+        margin: 10px 0;
+        height: 85px;
+        border-radius: 5px;
+        display: grid;
+        grid-template-columns: 15% 85%;
+        padding: 0 0.4rem;
+        position: relative;
+
+        .icon-pas{
+          margin: 10px 10px;
+          line-height: 55px;
+          color: #1d1b31;
+        }
+        textarea{
+          margin: 2%;
+          background: none;
+          outline: none;
+          border: none;
+          line-height: 1;
+          font-weight: 600;
+          font-size: 14px;
+          color: #333;
+        }
+        input::placeholder{
+          color: #aaa;
+          font-weight: 400;
+          font-size: 14px;
+        }
+      }
+      .btn-report{
+        width: 100px;
+        background-color: red;
+        border: none;
+        outline: none;
+        height: 30px;
+        border-radius: 49px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin: 10px 0;
+        cursor: pointer;
+      }
+      .btn-report::hover{
+        background-color: #cf454c;
+      }
+    }
+
+    .edit-forms{
+      display: flex;
+      align-items: left;
+      justify-content: center;
+      flex-direction: row;
+      padding: 1rem 1rem;
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+
+      .avatar-field{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-right: 15px;
+        .avatar-img{
+          width: 144px;
+          height: 144px;
+          margin: 20px;
+          border-radius: 100%;
+          align-self: center;
+        }
+ 
+        .btn-upload-ava{
+          width: 100px;
+          background-color: #1d1b31;
+          border: none;
+          outline: none;
+          height: 30px;
+          border-radius: 49px;
+          color: #fff;
+          text-transform: uppercase;
+          font-weight: 600;
+          margin: 10px 0;
+          cursor: pointer;
+          text-align: center;
+          align-self: center;
+        }
+        .btn-upload-ava-save{
+          width: 100px;
+          background-color: green;
+          border: none;
+          outline: none;
+          height: 30px;
+          border-radius: 49px;
+          color: #fff;
+          text-transform: uppercase;
+          font-weight: 600;
+          margin: 10px 0;
+          cursor: pointer;
+          text-align: center;
+          align-self: center;
+        }
+      }
+
+      .profile-field{
+        display: flex;
+        align-items: left;
+        justify-content: center;
+        flex-direction: column;
+        padding: 1rem 0rem;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        
+        .edit-field{
+          max-width: 380px;
+          width: 100%;
+          background-color: #E4E9F7;
+          margin: 10px 0;
+          height: 45px;
+          border-radius: 5px;
+          display: grid;
+          grid-template-columns: 15% 85%;
+          padding: 0 0.4rem;
+          position: relative;
+
+          .icon-edit{
+            margin: 10px 10px;
+            line-height: 55px;
+            color: #1d1b31;
+          }
+          input{
+            background: none;
+            outline: none;
+            border: none;
+            line-height: 1;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #333;
+          }
+          input::placeholder{
+            color: #aaa;
+            font-weight: 400;
+            font-size: 16px;
+          }
+
+        }
+        .btn-edit{
+          width: 100px;
+          background-color: green;
+          border: none;
+          outline: none;
+          height: 30px;
+          border-radius: 49px;
+          color: #fff;
+          text-transform: uppercase;
+          font-weight: 600;
+          margin: 10px 0;
+          cursor: pointer;
+          text-align: center;
+        }
+        .btn-edit::hover{
+          background-color: #51995b;
+        }
+      }
+    
+    }
+  }
+}
+
+

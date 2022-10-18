@@ -1,0 +1,45 @@
+.aboutus {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    .aboutus-container {
+      position: relative;
+      width: 100%;
+      background-color: #E4E9F7;
+      min-height: 100vh;
+      overflow: hidden;
+  
+      .aboutus-top {
+        display: flex;
+        position: relative;
+        width: 28%;
+        padding: 6px;
+        margin: 5%;
+        margin-left: 35%;
+        background-color: #1d1b31;
+        border-radius: 45px;
+        justify-content: baseline;
+        .aboutus-title {
+          color: #fff;
+          font-weight: 500;
+          font-size: 40px;
+          margin-left: 27%;
+          justify-content: baseline;
+
+        }
+    
+      }
+      .aboutus-bottom{
+        .member-list{
+          display: flex;
+          flex-direction: column;
+        }
+        .aboutus-bg{
+          width: 100%;
+          height: 100%;
+        }
+
+      }
+    }
+  }
+  

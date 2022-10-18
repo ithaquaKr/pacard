@@ -1,0 +1,106 @@
+.mydocument {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    .mydocument-container {
+      position: relative;
+      width: 100%;
+      background-color: #E4E9F7;
+      min-height: 100vh;
+      overflow: hidden;
+  
+      .mydocument-top {
+        display: flex;
+        position: relative;
+        width: 24%;
+        padding: 6px;
+        margin: 5%;
+        background-color: #1d1b31;
+        border-radius: 45px;
+        justify-content: baseline;
+        .mydocument-img {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          object-fit: cover;
+          align-self: center;
+          margin-left: 5px;
+          margin-right: 15px;
+        }
+          
+        .mydocument-title {
+          color: #fff;
+          font-weight: 500;
+          font-size: 20px;
+        }
+      
+      }
+      .new-document{
+        // display: flex;
+        // position: relative;
+        width: 24%;
+        margin-left: 5%;
+        // padding: 6px;
+        // margin: 5%;
+        .new-document-btn{
+            border: none;
+            border-radius: 10px;
+            padding: 5px 10px;
+            background-color: #3bb077;
+            color: white;
+            cursor: pointer;
+        }
+        
+    }
+      .library-bottom{
+        .datatable-data{
+            // height: 1100px;
+            height: 800px;
+            width: 1000px;
+            // padding: 40px;
+            margin-left: 5%;
+            margin-top: 2%;
+        }
+            
+        
+        .documentListItem{
+            display: flex;
+            width: 450px;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            
+        }
+    
+        .documentListEdit{
+            border: none;
+            border-radius: 10px;
+            padding: 5px 10px;
+            background-color: #3bb077;
+            color: white;
+            cursor: pointer;
+            margin-right: 20px;
+            
+        }
+        .documentListRead{
+            border: none;
+            border-radius: 10px;
+            padding: 5px 10px;
+            background-color: #f1d13f;
+            color: white;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        .documentListDelete{
+            color: red;
+            cursor: pointer;
+        }
+        .read-document{
+            display: flex;
+            height: 96px;
+            align-self: center;
+        }
+      }
+    }
+  }
+  
