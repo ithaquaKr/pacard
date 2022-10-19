@@ -1,0 +1,49 @@
+version: "3.9"
+services:
+
+  api:
+    container_name: pacard-api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8800:8800
+    env_file: ./api/.env
+    # volumes:
+    #   - ./api:/usr/app
+    networks:
+      - pacard-network
+  
+  client:
+    container_name: pacard-client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    # volumes:
+    #   - ./app/node_modules
+    #   - ./client:/app
+    depends_on:
+      - api
+    networks:
+      - pacard-network
+  
+  nginx:
+    restart: always
+    depends_on:
+      - api
+      - client
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    networks:
+      - pacard-network
+
+networks:
+  pacard-network:
+    driver: bridge
