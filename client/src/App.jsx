@@ -32,15 +32,16 @@ const App = () => {
         <Route>
           {user ? <Route path="/" element={<Landingpage/>} />: 
           // <Redirect to="/auth" />
-          <Route render={() => <Navigate to="/auth"/>} />
+          <Route render={() => <Navigate to="/home" element={<Home/>}/>} />
           }
         </Route>
-        <Route path="/auth">{!user ? <Route path="/auth" element={<Auth/>} /> : <Navigate to="/home"/>}</Route>
+        {/* <Route path="/auth">{!user ? <Route path="/auth" element={<Auth/>} /> : <Navigate to="/home"/>}</Route> */}
+        <Route path="/auth" element={<Auth/>}/>
         {user && (
           <>
           <Sidebar/>
           <div className="main-container">
-            <Route path="/home" element={<Home/>} />
+            {/* <Route path="/home" element={<Home/>} /> */}
             <Route path="/mydocuments" element={<MydocumentList />} />
             <Route path="/library" element={<Library/>} />
             <Route path="/todo" element={<Todo/>} />
