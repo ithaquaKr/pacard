@@ -1,9 +1,70 @@
-.home {
-    display: flex;
-    margin-top: 0px;
-    .homeContainer {
-      flex: 6;
-  
-    }
+//@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@200;300;400;500;600;700;800&display=swap");
+//
+//* {
+//  font-family: "Roboto" , sans-serif;
+//}
+
+.landingpg {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #E4E9F7;
+
+  .ld-container-1 {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
   }
-  
+
+  .ld-container-2 {
+    position: relative;
+    width: 100%;
+    // // background-color: #E4E9F7;
+    // min-height: 100vh;
+    overflow: hidden;
+    .content {
+      display: grid;
+      width: auto;
+
+    }
+    // .ldpg-top {
+    //   display: flex;
+    //   position: relative;
+    //   width: 28%;
+    //   padding: 6px;
+    //   margin: 5%;
+    //   margin-left: 35%;
+    //   background-color: #1d1b31;
+    //   border-radius: 45px;
+    //   justify-content: baseline;
+    //   .ldpg-title {
+    //     color: #fff;
+    //     font-weight: 500;
+    //     font-size: 40px;
+    //     margin-left: 27%;
+    //     justify-content: baseline;
+
+    //   }
+
+    // }
+    // .ldpg-bottom{
+    //   .member-list{
+    //     display: flex;
+    //     flex-direction: column;
+    //   }
+    //   .ldpg-bg{
+    //     width: 100%;
+    //     height: 100%;
+    //   }
+
+    // }
+
+
+  }
+  .ldpg-footer{
+    background-color:#53AFEE;
+    color: #fff;
+    border-top-right-radius: 65px;
+    border-top-left-radius: 65px;
+  }
+}

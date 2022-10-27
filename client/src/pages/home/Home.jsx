@@ -8,13 +8,13 @@ const Home = () => {
     <div className="home">
       <div className="home-container">
       <div className="home-top">
-        <img src={JSON.parse(window.localStorage.getItem('user')).avatar} alt="" className="home-info-img" />
+        {/* <img src={JSON.parse(window.localStorage.getItem('user')).avatar} alt="" className="home-info-img" /> */}
           <div className="home-info">
             <div className="home-info-items">
-              <span>name: {JSON.parse(window.localStorage.getItem('user')).username}</span>
+              {/* <span>name: {JSON.parse(window.localStorage.getItem('user')).username}</span> */}
             </div>
             <div className="home-info-items">
-              <span>email: {JSON.parse(window.localStorage.getItem('user')).email}</span>
+              {/* <span>email: {JSON.parse(window.localStorage.getItem('user')).email}</span> */}
             </div>
             <div className="home-info-items">
               <span>about: Something .... ?

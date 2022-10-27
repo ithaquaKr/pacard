@@ -10,46 +10,51 @@ import Aboutus from "./pages/aboutus/Aboutus";
 import Todo from "./pages/todo/Todo";
 
 import Sidebar from "./components/sidebar/Sidebar";
-
+// import Topbar from "./components/pg-topbar/pgTopbar";
+// import Navbar from "./components/navbar/Navbar";
+import ResponsiveAppBar from "./components/navbar/Navbar";
 
 import {
   BrowserRouter,
   Route,
-  Navigate,
+  // Navigate,
   Routes,
+  Outlet, Navigate
 } from "react-router-dom";
 
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext/AuthContext";
 
+const Applayout = ({ user }) => user ? (
+  <>
+    <Sidebar/>
+    <div className="main-container">
+      <ResponsiveAppBar/>
+      <Outlet/>
+    </div>
+  </>
+) : ( <Navigate to="/auth" replace /> );
+
+
 const App = () => {
   const { user } = useContext(AuthContext);
-
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route>
-          {user ? <Route path="/" element={<Landingpage/>} />: 
-          // <Redirect to="/auth" />
-          <Route render={() => <Navigate to="/home" element={<Home/>}/>} />
-          }
+        <Route path="/" element={<Landingpage/>} />
+        <Route path="/auth" element={
+        (!user ? <Auth/> : <Navigate to="/home" replace />)
+
+        }/>
+        <Route element={<Applayout user = {user}/>} >
+          <Route path="/home" element={ <Home /> }/>
+          <Route path="/mydocuments" element={ <MydocumentList /> } />
+          <Route path="/library" element={ <Library/> } />
+          <Route path="/todo" element={ <Todo/> } />
+          <Route path="/account" element={ <Account/> } />
+          {/*<Route path="/aboutus" element={ <Aboutus/> } />*/}
         </Route>
-        {/* <Route path="/auth">{!user ? <Route path="/auth" element={<Auth/>} /> : <Navigate to="/home"/>}</Route> */}
-        <Route path="/auth" element={<Auth/>}/>
-        {user && (
-          <>
-          <Sidebar/>
-          <div className="main-container">
-            {/* <Route path="/home" element={<Home/>} /> */}
-            <Route path="/mydocuments" element={<MydocumentList />} />
-            <Route path="/library" element={<Library/>} />
-            <Route path="/todo" element={<Todo/>} />
-            <Route path="/account" element={<Account/>} />
-            <Route path="/aboutus" element={<Aboutus/>} />
-          </div>
-          </>
-        )}
       </Routes>
     </BrowserRouter>
   );

@@ -1,8 +1,14 @@
 .home {
-    display: flex;
-    margin-top: 0px;
+    //display: flex;
+    //margin-top: 0px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     .home-container {
-      flex: 6;
+      position: relative;
+      width: 100%;
+      background-color: #E4E9F7;
+      overflow: hidden;
 
       .home-top {
         display: flex;
@@ -23,22 +29,21 @@
           object-fit: cover;
           margin-right: 20px;
         }
-          
+
         .home-info {
           margin-top: 10px;
           color: #fff;
           font-weight: 300;
           font-size: 14px;
-      
+
           .home-info-items {
             width: 100%;
             margin-left: 15px;
             // justify-content: space-between;
           }
         }
-      
+
       }
-      
+
     }
   }
-  
