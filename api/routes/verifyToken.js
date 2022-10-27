@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Card = require("../models/Card");
-const Todo = require("../models/Todo");
 
 
 const verifyToken = (req, res, next) => {
@@ -44,7 +43,7 @@ const verifyTokenAndAuthorization = (req, res, next) => {
 const verifyAuthor = (req, res, next) => {
   verifyToken(req, res, async () => {
     FindUser = await User.findOne({ _id: req.user.id });
-    
+
     // Check user
     if (FindUser !== null) {
       const cards = await Card.findOne({ verify: req.user.id, _id: req.params.id });
@@ -61,30 +60,29 @@ const verifyAuthor = (req, res, next) => {
   });
 };
 
-const verifyTodoAuthor = (req, res, next) => {
-  verifyToken(req, res, async () => {
-    FindUser = await User.findOne({ _id: req.user.id });
-    
-    // Check user
-    if (FindUser !== null) {
-      const todos = await Todo.findOne({ verify: req.user.id, _id: req.params.id });
-
-      // Check Document with user id
-      if (todos === null) {
-        return res.status(403).json("You are not Author/Admin to do that!");
-      } else {
-        next();
-      }
-    } else {
-      return res.status(403).json("You are not alowed to do that!");
-    }
-  });
-};
+// const verifyTodoAuthor = (req, res, next) => {
+//   verifyToken(req, res, async () => {
+//     FindUser = await User.findOne({ _id: req.user.id });
+//
+//     // Check user
+//     if (FindUser !== null) {
+//       const todos = await Todo.findOne({ verify: req.user.id, _id: req.params.id });
+//
+//       // Check Document with user id
+//       if (todos === null) {
+//         return res.status(403).json("You are not Author/Admin to do that!");
+//       } else {
+//         next();
+//       }
+//     } else {
+//       return res.status(403).json("You are not alowed to do that!");
+//     }
+//   });
+// };
 
 
 module.exports = {
   verifyToken,
   verifyTokenAndAuthorization,
-  verifyAuthor,
-  verifyTodoAuthor
+  verifyAuthor
 };
