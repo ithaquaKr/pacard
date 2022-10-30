@@ -7,6 +7,7 @@ dotenv.config();
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const cardRoute = require("./routes/cards");
+const collectionRoute = require("./routes/collections")
 const connectDB = async () => {
 	try {
 		await mongoose.connect(
@@ -29,7 +30,7 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/cards", cardRoute);
-
+app.use("/api/collections", collectionRoute)
 app.listen(process.env.PORT, () => {
   console.log(`Backend server is running on PORT: ${process.env.PORT}!`);
 });

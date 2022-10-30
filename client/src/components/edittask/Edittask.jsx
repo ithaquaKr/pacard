@@ -2,8 +2,8 @@ import * as React from 'react';
 
 
 import { useContext, useState } from "react";
-import { updateTodo } from "../../context/todoContext/apiCalls";
-import { TodoContext } from "../../context/todoContext/TodoContext";
+import { updateCard } from "../../context/cardContext/apiCalls";
+import { CardContext } from "../../context/cardContext/CardContext";
 
 import "./edittask.scss"
 
@@ -52,25 +52,25 @@ export default function Edittask(props) {
      };
 
     // Create new task
-    const [todo, setTodo] = useState(null);
-  
-    const { dispatch } = useContext(TodoContext);
-  
+    const [card, setCard] = useState(null);
+
+    const { dispatch } = useContext(CardContext);
+
     const handleChange = (e) => {
       const value = e.target.value;
-      setTodo({ ...todo, [e.target.name]: value });
+      setCard({ ...card, [e.target.name]: value });
     };
-    
+
 
     const handleSubmit = (e) => {
       e.preventDefault();
       try {
-        updateTodo(props.dataFromParent._id, todo, dispatch);
+        updateCard(props.dataFromParent._id, card, dispatch);
         setOpen(false);
       } catch (err) {
       }
     };
-    
+
 
   return (
     <div>

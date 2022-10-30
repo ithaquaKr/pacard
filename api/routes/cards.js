@@ -2,20 +2,19 @@ const router = require("express").Router();
 const Card = require("../models/Card");
 const {
     verifyToken,
-    verifyAuthor
+    verifyCard
   } = require("./verifyToken");
-  
+
 
 //CREATE
-
 router.post("/", verifyToken, async (req, res) => {
-    const {title, desc, question, classify } = req.body;
+    const {title, question, img, collect } = req.body;
     try {
       const newCard = new Card({
         title,
-        desc,
         question,
-        classify,
+        img,
+        collect,
         uploadby: req.user.username,
         verify: req.user.id
       });
@@ -27,17 +26,16 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 //UPDATE
-
-router.put("/:id", verifyAuthor, async (req, res) => {
+router.put("/:id", verifyCard, async (req, res) => {
     try {
-      const updatedDocument = await Document.findByIdAndUpdate(
+      const updatedCard = await Card.findByIdAndUpdate(
         req.params.id,
         {
           $set: req.body,
         },
         { new: true }
       );
-      res.status(200).json(updatedDocument);
+      res.status(200).json(updatedCard);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -45,9 +43,9 @@ router.put("/:id", verifyAuthor, async (req, res) => {
 
 //DELETE
 
-router.delete("/:id", verifyAuthor, async (req, res) => {
+router.delete("/:id", verifyCard, async (req, res) => {
     try {
-      await Document.findByIdAndDelete(req.params.id);
+      await Card.findByIdAndDelete(req.params.id);
       res.status(200).json("The document has been deleted...");
     } catch (err) {
       res.status(500).json(err);
@@ -55,31 +53,31 @@ router.delete("/:id", verifyAuthor, async (req, res) => {
 });
 
 //GET
+//
+// router.get("/find/:id", verifyToken, async (req, res) => {
+//   try {
+//     const card = await Card.findById(req.params.id);
+//     res.status(200).json(card);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
-router.get("/find/:id", verifyToken, async (req, res) => {
-  try {
-    const document = await Document.findById(req.params.id);
-    res.status(200).json(document);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// //GET ALL for user
+// router.get("/cards", verifyToken, async (req, res) => {
+//     try {
+//       const cards = await Card.find({verify: req.user.id});
+//       res.status(200).json(cards.reverse());
+//     } catch (err) {
+//       res.status(500).json(err);
+//     }
+// });
 
 //GET ALL for user
-router.get("/mydocuments", verifyToken, async (req, res) => {
-    try {
-      const documents = await Document.find({verify: req.user.id});
-      res.status(200).json(documents.reverse());
-    } catch (err) {
-      res.status(500).json(err);
-    }
-});
-
-//GET ALL for user
-router.get("/", verifyToken, async (req, res) => {
+router.get("/collection/:id", verifyToken, async (req, res) => {
   try {
-    const documents = await Document.find();
-    res.status(200).json(documents.reverse());
+    const cards = await Card.find({ collect: req.params.id });
+    res.status(200).json(cards);
   } catch (err) {
     res.status(500).json(err);
   }

@@ -4,15 +4,15 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { AuthContextProvider } from "./context/authContext/AuthContext";
 import { DocumentContextProvider } from "./context/documentContext/DocumentContext";
-import { TodoContextProvider } from "./context/todoContext/TodoContext";
+import { CardContextProvider } from "./context/cardContext/CardContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthContextProvider>
       <DocumentContextProvider>
-        <TodoContextProvider>
+        <CardContextProvider>
           <App/>
-        </TodoContextProvider>
+        </CardContextProvider>
       </DocumentContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,

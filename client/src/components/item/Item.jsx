@@ -22,12 +22,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Edittask from "../../components/edittask/Edittask"
 
 import { useContext} from "react";
-import { TodoContext } from "../../context/todoContext/TodoContext";
-import { deleteTodo } from "../../context/todoContext/apiCalls";
+import { CardContext } from "../../context/cardContext/CardContext";
+import { deleteCard } from "../../context/cardContext/apiCalls";
 
 export default function Item(props) {
-  const { dispatch } = useContext(TodoContext);
-  
+  const { dispatch } = useContext(CardContext);
+
 
 
   const colors = [
@@ -65,24 +65,24 @@ export default function Item(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  
+
   const handleDelete = (id) => {
-    deleteTodo(id, dispatch);
+    deleteCard(id, dispatch);
     setOpen(false);
   };
   // const statusColor = "";
-    
+
   // switch(props.dataFromParent.status) {
-  //   case "TO LEARN":   
+  //   case "TO LEARN":
   //   statusColor = "#F48687";
-  //   case "LEARNING":   
+  //   case "LEARNING":
   //   statusColor = "#5D93E1";
-  //   case "LEARNED": 
+  //   case "LEARNED":
   //   statusColor = "#5DC250";
-  //   default:      
+  //   default:
   //   statusColor = "";
   // }
-  
+
   return (
     <Card sx={{ maxWidth: 325 }}>
       <Box sx={{
@@ -96,11 +96,11 @@ export default function Item(props) {
       }}
       />
       <CardContent>
-        <Button size="normal" 
-          sx = {{ 
-            color: 'black', 
-            backgroundColor: useColor.secondaryColor, 
-            borderRadius: 4, 
+        <Button size="normal"
+          sx = {{
+            color: 'black',
+            backgroundColor: useColor.secondaryColor,
+            borderRadius: 4,
             '&:hover': {
               backgroundColor: useColor.secondaryColor,
             },
@@ -109,45 +109,45 @@ export default function Item(props) {
           }}>
             {props.dataFromParent.title}
           </Button>
-        <Typography variant="body2" color="text.secondary" 
-          sx={{ 
+        <Typography variant="body2" color="text.secondary"
+          sx={{
             height: 80,
             marginLeft: 1,
           }}>
           {props.dataFromParent.info}
         </Typography>
           { props.dataFromParent.status === "TO LEARN" &&
-        <Button size="normal" 
-          sx = {{ 
-            color: 'white', 
-            backgroundColor:  "#F48687", 
-            borderRadius: 4, 
+        <Button size="normal"
+          sx = {{
+            color: 'white',
+            backgroundColor:  "#F48687",
+            borderRadius: 4,
           '&:hover': {
-            backgroundColor:  "#F48687", 
+            backgroundColor:  "#F48687",
             opacity: [0.9, 0.8, 0.7],
           },}}>
           {props.dataFromParent.status}
         </Button> }
         { props.dataFromParent.status === "LEARNING" &&
-        <Button size="normal" 
-          sx = {{ 
-            color: 'white', 
-            backgroundColor:  "#5D93E1", 
-            borderRadius: 4, 
+        <Button size="normal"
+          sx = {{
+            color: 'white',
+            backgroundColor:  "#5D93E1",
+            borderRadius: 4,
           '&:hover': {
-            backgroundColor:  "#5D93E1", 
+            backgroundColor:  "#5D93E1",
             opacity: [0.9, 0.8, 0.7],
           },}}>
           {props.dataFromParent.status}
         </Button> }
         { props.dataFromParent.status === "LEARNED" &&
-        <Button size="normal" 
-          sx = {{ 
-            color: 'white', 
-            backgroundColor:  "#5DC250", 
-            borderRadius: 4, 
+        <Button size="normal"
+          sx = {{
+            color: 'white',
+            backgroundColor:  "#5DC250",
+            borderRadius: 4,
           '&:hover': {
-            backgroundColor:  "#5DC250", 
+            backgroundColor:  "#5DC250",
             opacity: [0.9, 0.8, 0.7],
           },}}>
           {props.dataFromParent.status}

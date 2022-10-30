@@ -2,8 +2,8 @@ import * as React from 'react';
 
 
 import { useContext, useState } from "react";
-import { createTodo } from "../../context/todoContext/apiCalls";
-import { TodoContext } from "../../context/todoContext/TodoContext";
+import { createTodo } from "../../context/cardContext/apiCalls";
+import { CardContext } from "../../context/cardContext/CardContext";
 
 import "./newtask.scss"
 
@@ -50,14 +50,14 @@ export default function Newtask() {
 
     // Create new task
     const [todo, setTodo] = useState(null);
-  
-    const { dispatch } = useContext(TodoContext);
-  
+
+    const { dispatch } = useContext(CardContext);
+
     const handleChange = (e) => {
       const value = e.target.value;
       setTodo({ ...todo, [e.target.name]: value });
     };
-    
+
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -67,11 +67,11 @@ export default function Newtask() {
       } catch (err) {
       }
     };
-    
+
 
   return (
     <div>
-      <Button onClick={handleClickOpen} sx={{color: 'green'}} endIcon={<AddCircleIcon sx={{ height: 54, width: 54, }} />} ></Button>  
+      <Button onClick={handleClickOpen} sx={{color: 'green'}} endIcon={<AddCircleIcon sx={{ height: 54, width: 54, }} />} ></Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Create Task</DialogTitle>
         <DialogContent>

@@ -87,14 +87,14 @@ export default function Auth() {
               <h2 className="title">ĐĂNG NHẬP</h2>
               <div className="input-field">
                 <AccountCircleIcon className="icon"/>
-                <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+                <input type="text" placeholder="Tên người dùng" onChange={(e) => setUsername(e.target.value)} />
               </div>
               <div className="input-field">
                 <LockIcon className="icon"/>
-                <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                <input type="password" placeholder="Mật khẩu" onChange={(e) => setPassword(e.target.value)} />
 
               </div>
-              <input type="submit" value="Sign In" className="btn solid" onClick={handleLogin} />
+              <input type="submit" value="Đăng nhập" className="btn solid" onClick={handleLogin} />
                 {error &&  <Stack sx={{ width: '45%' }}>
                   <Alert severity="error">Something Wrong?!</Alert>
                 </Stack>}
@@ -110,14 +110,14 @@ export default function Auth() {
             </div>
             <div className="input-field">
               <AccountCircleIcon className="icon"/>
-              <input type="text" placeholder="Username" ref={usernameRef} />
+              <input type="text" placeholder="Tên người dùng" ref={usernameRef} />
             </div>
             <div className="input-field">
               <LockIcon className="icon"/>
-              <input type="password" placeholder="Password" ref={passwordRef} />
+              <input type="password" placeholder="Mật khẩu" ref={passwordRef} />
 
             </div>
-            <input type="submit" className="btn" value="Sign Up" onClick={handleFinish} />
+            <input type="submit" className="btn" value="Đăng kí" onClick={handleFinish} />
           </form>
           </div>
         </div>

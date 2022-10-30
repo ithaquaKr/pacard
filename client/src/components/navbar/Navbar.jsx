@@ -50,7 +50,7 @@ function ResponsiveAppBar() {
 
   return (
     <AppBar position="static" sx={{ backgroundColor: '#E4E9F7'}}>
-      <Container maxWidth="xl">
+      <Container maxWidth="false">
         <Toolbar disableGutters sx={{ display: { md: 'flex'}, justifyContent: 'right'}}>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

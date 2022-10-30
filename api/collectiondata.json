@@ -1,0 +1,27 @@
+[
+    {
+        "title": "Học phần 1",
+        "desc": "Mô tả học phần 1",
+        "classify": "Animal 1",
+        "shared": true
+    },
+    {
+        "title": "Học phần 1",
+        "desc": "Mô tả học phần 1",
+        "classify": "Animal 2",
+        "shared": true
+    },
+    {
+        "title": "Học phần 3",
+        "desc": "Mô tả học phần 3",
+        "classify": "Animal 3",
+        "shared": false
+    },
+    {
+        "title": "Học phần 4",
+        "desc": "Mô tả học phần 4",
+        "classify": "Animal 4",
+        "shared": false
+    }
+
+]

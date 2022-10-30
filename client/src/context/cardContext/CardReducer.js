@@ -1,74 +1,74 @@
-const TodoReducer = (state, action) => {
+const CardReducer = (state, action) => {
   switch (action.type) {
-    case "GET_TODOS_START":
+    case "GET_CARDS_START":
       return {
-        todos: [],
+        cards: [],
         isFetching: true,
         error: false,
       };
-    case "GET_TODOS_SUCCESS":
+    case "GET_CARDS_SUCCESS":
       return {
-        todos: action.payload,
+        cards: action.payload,
         isFetching: false,
         error: false,
       };
-    case "GET_TODOS_FAILURE":
+    case "GET_CARDS_FAILURE":
       return {
-        todos: [],
+        cards: [],
         isFetching: false,
         error: true,
       };
-    case "CREATE_TODO_START":
+    case "CREATE_CARD_START":
       return {
         ...state,
         isFetching: true,
         error: false,
       };
-    case "CREATE_TODO_SUCCESS":
+    case "CREATE_CARD_SUCCESS":
       return {
-        todos: [...state.todos, action.payload],
+        cards: [...state.cards, action.payload],
         isFetching: false,
         error: false,
       };
-    case "CREATE_TODO_FAILURE":
+    case "CREATE_CARD_FAILURE":
       return {
         ...state,
         isFetching: false,
         error: true,
       };
-    case "UPLOAD_TODO_START":
+    case "UPLOAD_CARD_START":
       return {
         ...state,
         isFetching: true,
         error: false,
       };
-    case "UPLOAD_TODO_SUCCESS":
+    case "UPLOAD_CARD_SUCCESS":
       return {
-        todos: state.todo.map(
-          (todo) => todo._id === action.payload._id && action.payload
+        cards: state.card.map(
+          (card) => card._id === action.payload._id && action.payload
         ),
         isFetching: false,
         error: false,
       };
-    case "UPLOAD_TODO_FAILURE":
+    case "UPLOAD_CARD_FAILURE":
       return {
         ...state,
         isFetching: false,
         error: true,
       };
-    case "DELETE_TODO_START":
+    case "DELETE_CARD_START":
       return {
         ...state,
         isFetching: true,
         error: false,
       };
-    case "DELETE_TODO_SUCCESS":
+    case "DELETE_CARD_SUCCESS":
       return {
-        todos: state.todos.filter((todo) => todo._id !== action.payload),
+        cards: state.cards.filter((card) => card._id !== action.payload),
         isFetching: false,
         error: false,
       };
-    case "DELETE_TODO_FAILURE":
+    case "DELETE_CARD_FAILURE":
       return {
         ...state,
         isFetching: false,
@@ -79,4 +79,4 @@ const TodoReducer = (state, action) => {
   }
 };
 
-export default TodoReducer;
+export default CardReducer;

@@ -1,0 +1,67 @@
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200;300;400;500;600;700;800&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto" , sans-serif;
+}
+
+.learn {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  .learn-container {
+    position: relative;
+    width: 100%;
+    background-color: #E4E9F7;
+    min-height: 100vh;
+    overflow: hidden;
+
+    .learn-top {
+      display: flex;
+      position: relative;
+      width: 24%;
+      padding: 6px;
+      margin: 5%;
+      margin-top: 1%;
+      background-color: #53AFEE;
+      border-radius: 45px;
+      justify-content: baseline;
+
+      .learn-img {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        object-fit: cover;
+        align-self: center;
+        margin-left: 5px;
+        margin-right: 15px;
+        color: #FFFFFF;
+      }
+
+      .learn-title {
+        color: #fff;
+        font-weight: 500;
+        font-size: 20px;
+      }
+
+    }
+
+    //.new-document{
+    //  width: 24%;
+    //  margin-left: 5%;
+    //}
+
+    .learn-bottom{
+      .learn-data{
+          width: 1000px;
+          margin-left: 5%;
+          margin-top: 2%;
+          margin-bottom: 5%;
+      }
+    }
+  }
+}

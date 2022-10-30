@@ -53,25 +53,23 @@ const Sidebar = () => {
       <div className="logo-details">
         <img src="/images/logo.svg" alt="" />
           <Link to="/home" style={{ textDecoration: "none" }} className = "logo_name">
-            {/*<div className="logo_name">PACARD</div>*/}
+            <div className="logo_name">PACARD</div>
           </Link>
-        <i className='bx bx-menu' id="btn"></i>
       </div>
 
     <ul className="nav-list">
 
-      <li>
-        <i className='bx-search' ><SearchIcon className="bx-search-icon"/></i>
-        <input type="text" placeholder="Tìm kiếm ..."></input>
-        <span className="tooltip">Tìm kiếm</span>
-      </li>
+      {/*<li>*/}
+      {/*  <i className='bx-search' ><SearchIcon className="bx-search-icon"/></i>*/}
+      {/*  <input type="text" placeholder="Tìm kiếm ..."></input>*/}
+      {/*  <span className="tooltip">Tìm kiếm</span>*/}
+      {/*</li>*/}
 
       <li>
         <Link to="/home" style={{ textDecoration: "none" }}>
           <i><DashboardIcon className="icon"/></i>
           <span className="links_name">Bảng điều khiển</span>
         </Link>
-        <span className="tooltip">Bảng điều khiển</span>
       </li>
 
       {/*<li>*/}
@@ -83,7 +81,7 @@ const Sidebar = () => {
       {/*</li>*/}
 
       <li>
-        <Link to="/todo" style={{ textDecoration: "none" }}>
+        <Link to="/learn" style={{ textDecoration: "none" }}>
           <i><LightbulbIcon className="icon"/></i>
           <span className="links_name">Học từ mới</span>
         </Link>
@@ -91,7 +89,7 @@ const Sidebar = () => {
       </li>
 
       <li>
-        <Link to="/mydocument" style={{ textDecoration: "none" }}>
+        <Link to="/practice" style={{ textDecoration: "none" }}>
           <i><DriveFileRenameOutlineIcon className="icon"/></i>
           <span className="links_name">Ôn tập</span>
         </Link>
@@ -132,12 +130,14 @@ const Sidebar = () => {
       {/*</li>*/}
 
       <li>
-        <Link to="/aboutus" style={{ textDecoration: "none" }}>
+        <Link to="/info" style={{ textDecoration: "none" }}>
           <i><InfoIcon className="icon"/></i>
           <span className="links_name">Thông tin</span>
         </Link>
         <span className="tooltip">Thông tin</span>
       </li>
+
+      <i className='bx bx-menu' id="btn"></i>
 
     </ul>
   </div>

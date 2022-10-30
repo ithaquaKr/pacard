@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Card = require("../models/Card");
+const Collection = require("../models/Collection")
 
 
 const verifyToken = (req, res, next) => {
@@ -21,28 +22,18 @@ const verifyToken = (req, res, next) => {
 
 const verifyTokenAndAuthorization = (req, res, next) => {
   verifyToken(req, res, async () => {
-    FindUser = await User.findOne({ _id: req.user.id });
+    let FindUser = await User.findOne({ _id: req.user.id });
     if (FindUser !== null) {
       next();
     } else {
-      return res.status(403).json("You are not alowed to do that!");
+      return res.status(403).json("You are not allowed to do that!");
     }
   });
 };
 
-// const verifyTokenAndAdmin = (req, res, next) => {
-//   verifyToken(req, res, () => {
-//     if (req.user.isAdmin) {
-//       next();
-//     } else {
-//       return res.status(403).json("You are not admin to do that!");
-//     }
-//   });
-// };
-
-const verifyAuthor = (req, res, next) => {
+const verifyCard = (req, res, next) => {
   verifyToken(req, res, async () => {
-    FindUser = await User.findOne({ _id: req.user.id });
+    let FindUser = await User.findOne({ _id: req.user.id });
 
     // Check user
     if (FindUser !== null) {
@@ -55,34 +46,36 @@ const verifyAuthor = (req, res, next) => {
         next();
       }
     } else {
-      return res.status(403).json("You are not alowed to do that!");
+      return res.status(403).json("You are not allowed to do that!");
     }
   });
 };
 
-// const verifyTodoAuthor = (req, res, next) => {
-//   verifyToken(req, res, async () => {
-//     FindUser = await User.findOne({ _id: req.user.id });
-//
-//     // Check user
-//     if (FindUser !== null) {
-//       const todos = await Todo.findOne({ verify: req.user.id, _id: req.params.id });
-//
-//       // Check Document with user id
-//       if (todos === null) {
-//         return res.status(403).json("You are not Author/Admin to do that!");
-//       } else {
-//         next();
-//       }
-//     } else {
-//       return res.status(403).json("You are not alowed to do that!");
-//     }
-//   });
-// };
+const verifyCollection = (req, res, next) => {
+  verifyToken(req, res, async () => {
+    let FindUser = await User.findOne({ _id: req.user.id });
+
+    //Check User
+    if (FindUser !== null) {
+      const collections = await Collection.findOne({ verify: req.user.id, _id: req.params.id });
+
+      //Check Collection with user id
+      if (collections === null) {
+        return res.status(403).json("You are not Author/Admin to do that");
+      } else {
+        next();
+      }
+    } else {
+      return res.status(403).json("You are not allowed to do that")
+    }
+  })
+};
+
 
 
 module.exports = {
   verifyToken,
   verifyTokenAndAuthorization,
-  verifyAuthor
+  verifyCard,
+  verifyCollection
 };
