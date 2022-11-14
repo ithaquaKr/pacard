@@ -6,8 +6,8 @@ const cors = require('cors');
 dotenv.config();
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
-const cardRoute = require("./routes/cards");
-const collectionRoute = require("./routes/collections");
+// const cardRoute = require("./routes/cards");
+const setRoute = require("./routes/sets");
 const namespaceRoute = require("./routes/namespaces");
 
 const connectDB = async () => {
@@ -31,8 +31,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
-app.use("/api/cards", cardRoute);
-app.use("/api/collections", collectionRoute);
+// app.use("/api/cards", cardRoute);
+app.use("/api/sets", setRoute);
 app.use("/api/namespaces", namespaceRoute);
 
 app.listen(process.env.PORT, () => {

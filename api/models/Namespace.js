@@ -4,7 +4,12 @@ const NamespaceSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, unique: true },
     desc: { type: String, required: true },
-    coll: { type: [String] },
+    tags: { type: [String] },
+    sets: [{
+      set_id: String,
+      total: Number,
+      learnedTotal: Number,
+    }],
     verify: { type: String },
   },
   { timestamps: true }

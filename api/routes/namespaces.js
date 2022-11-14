@@ -1,19 +1,21 @@
 const router = require("express").Router();
 const Namespace = require("../models/Namespace");
+
 const {
   verifyToken,
   verifyNamespace
 } = require("./verifyToken");
 
-
+//NAMESPACE ACTION
 //CREATE
 router.post("/", verifyToken, async (req, res) => {
-    const {name, desc, coll } = req.body;
+    const {name, desc, tags, sets } = req.body;
     try {
       const newNamespace = new Namespace({
         name,
         desc,
-        coll,
+        tags,
+        sets,
         verify: req.user.id
       });
       const savedNamespace = await newNamespace.save();
@@ -39,14 +41,25 @@ router.put("/:id", verifyNamespace, async (req, res) => {
     }
 });
 
+//DELETE
+router.delete("/:id", verifyNamespace, async (req, res) => {
+    try {
+      await Namespace.findByIdAndDelete(req.params.id);
+      res.status(200).json("The collection has been deleted...");
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
+
+
 //ADD COLLECTION FOR NAMESPACE
-router.put("/addcollection/:id", verifyNamespace, async (req, res) => {
+router.put("/addset/:id", verifyNamespace, async (req, res) => {
     try {
       const updatedNamespace = await Namespace.findByIdAndUpdate(
         req.params.id,
         {
           $push: {
-            "coll": req.body.coll,
+            "sets": req.body.sets,
           }
         },
         { new: true }
@@ -57,15 +70,6 @@ router.put("/addcollection/:id", verifyNamespace, async (req, res) => {
     }
 });
 
-//DELETE
-router.delete("/:id", verifyNamespace, async (req, res) => {
-    try {
-      await Namespace.findByIdAndDelete(req.params.id);
-      res.status(200).json("The collection has been deleted...");
-    } catch (err) {
-      res.status(500).json(err);
-    }
-});
 
 //GET COLLECTION BY ID FOR USER
 router.get("/find/:id", verifyNamespace, async (req, res) => {

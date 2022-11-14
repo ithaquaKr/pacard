@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const Card = require("../models/Card");
-const Collection = require("../models/Collection")
+// const Card = require("../models/Card");
+const Set = require("../models/Set")
 const Namespace = require("../models/Namespace")
 
 const verifyToken = (req, res, next) => {
@@ -31,36 +31,36 @@ const verifyTokenAndAuthorization = (req, res, next) => {
   });
 };
 
-const verifyCard = (req, res, next) => {
-  verifyToken(req, res, async () => {
-    let FindUser = await User.findOne({ _id: req.user.id });
+// const verifyCard = (req, res, next) => {
+//   verifyToken(req, res, async () => {
+//     let FindUser = await User.findOne({ _id: req.user.id });
+//
+//     // Check user
+//     if (FindUser !== null) {
+//       const cards = await Card.findOne({ verify: req.user.id, _id: req.params.id });
+//
+//       // Check Document with user id
+//       if (cards === null) {
+//         return res.status(403).json("You are not Author/Admin to do that!");
+//       } else {
+//         next();
+//       }
+//     } else {
+//       return res.status(403).json("You are not allowed to do that!");
+//     }
+//   });
+// };
 
-    // Check user
-    if (FindUser !== null) {
-      const cards = await Card.findOne({ verify: req.user.id, _id: req.params.id });
-
-      // Check Document with user id
-      if (cards === null) {
-        return res.status(403).json("You are not Author/Admin to do that!");
-      } else {
-        next();
-      }
-    } else {
-      return res.status(403).json("You are not allowed to do that!");
-    }
-  });
-};
-
-const verifyCollection = (req, res, next) => {
+const verifySet = (req, res, next) => {
   verifyToken(req, res, async () => {
     let FindUser = await User.findOne({ _id: req.user.id });
 
     //Check User
     if (FindUser !== null) {
-      const collections = await Collection.findOne({ verify: req.user.id, _id: req.params.id });
+      const sets = await Set.findOne({ verify: req.user.id, _id: req.params.set_id });
 
       //Check Collection with user id
-      if (collections === null) {
+      if (sets === null) {
         return res.status(403).json("You are not Author/Admin to do that");
       } else {
         next();
@@ -95,7 +95,7 @@ const verifyNamespace = (req, res, next) => {
 module.exports = {
   verifyToken,
   verifyTokenAndAuthorization,
-  verifyCard,
-  verifyCollection,
+  // verifyCard,
+  verifySet,
   verifyNamespace
 };
