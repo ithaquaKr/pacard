@@ -3,8 +3,7 @@ const mongoose = require("mongoose");
 // SubDocuments
 const CardSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true, unique: true },
-    question: { type: String, require: true },
+    title: { type: String, required: true },
     img: { type: String, require: true },
     level: { type: Number, default: 3},
   },
@@ -20,7 +19,7 @@ const RatingSchema = new mongoose.Schema(
 )
 
 
-// Collection
+// Set
 const SetSchema = new mongoose.Schema(
   {
     title: { type: String, required: true, unique: true },
@@ -30,7 +29,6 @@ const SetSchema = new mongoose.Schema(
     rating: {type: RatingSchema },
     shared: { type: Boolean, require: true, default: false},
     cards: [CardSchema],
-    // author: { type: String, require: true}
     verify: { type: String },
 
   },

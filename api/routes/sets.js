@@ -4,12 +4,13 @@ const Set = require("../models/Set");
 
 const {
   verifyToken,
-  verifySet, verifyNamespace
+  verifySet,
 } = require("./verifyToken");
-const Namespace = require("../models/Namespace");
 
 
-//CREATE
+// SETS ACTIONS
+//
+// CREATE SETS
 router.post("/", verifyToken, async (req, res) => {
     const {title, desc, classify, shared } = req.body;
     const rating = {
@@ -35,8 +36,8 @@ router.post("/", verifyToken, async (req, res) => {
     }
 });
 
-//UPDATE
-router.put("/:id", verifySet, async (req, res) => {
+// UPDATE SETS
+router.put("/update/:id", verifySet, async (req, res) => {
     try {
       const updatedSet = await Set.findByIdAndUpdate(
         req.params.id,
@@ -51,8 +52,8 @@ router.put("/:id", verifySet, async (req, res) => {
     }
 });
 
-//DELETE
-router.delete("/:id", verifySet, async (req, res) => {
+// DELETE SETS
+router.delete("/delete/:id", verifySet, async (req, res) => {
     try {
       await Set.findByIdAndDelete(req.params.id);
       res.status(200).json("The collection has been deleted...");
@@ -61,25 +62,115 @@ router.delete("/:id", verifySet, async (req, res) => {
     }
 });
 
-//CARD ACTION
+// GET SETS BY ID FOR USER
+router.get("/view/:id", verifySet, async (req, res) => {
+  try {
+    const sets = await Set.findById(req.params.id);
+    res.status(200).json(sets);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
+// GET ALL SETS FOR USER
+router.get("/view", verifyToken, async (req, res) => {
+  try {
+    const sets = await Set.find({ verify: req.user.id });
+    res.status(200).json(sets);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
+// GET SETS BY ID PUBLIC
+router.get("/library/:id", verifyToken, async (req, res) => {
+  try {
+    const sets = await Set.findById(req.params.id);
+    res.status(200).json(sets);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// GET ALL SETS PUBLIC
+router.get("/library/", verifyToken, async (req, res) => {
+  try {
+    const sets = await Set.find({ shared: true });
+    res.status(200).json(sets);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// VOTE STAR
+router.put("/:set_id/vote", verifyToken, async(req, res) => {
+  try {
+    const setVote = await Set.findOne({"_id": req.params.set_id});
+    const newVoteTotal = setVote.rating.voteTotal + 1;
+    const newStar = Math.round((setVote.rating.star * setVote.rating.voteTotal + req.body.star)/newVoteTotal);
+    console.log(newVoteTotal);
+    console.log(newStar);
+    const newRating = await Set.findByIdAndUpdate(
+      {"_id": req.params.set_id},
+      {
+        $set: {
+          "rating.voteTotal": newVoteTotal,
+          "rating.star": newStar
+        }
+      },
+      { new: true}
+    );
+    res.status(200).json(newRating);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// ADD TO MY SETS LIST
+router.post("/:set_id/addset", verifyToken, async(req, res) =>{
+  try {
+    const addSet = await Set.findOne({"_id": req.params.set_id});
+    const newTitle = addSet.title + " clone by " + req.user.username
+    const {desc, classify, uploadBy, shared, cards } = addSet;
+    const rating = {
+      voteTotal: 0,
+      star: 0
+    };
+    const newSet = new Set({
+      title: newTitle,
+      desc,
+      classify,
+      uploadBy,
+      rating,
+      shared,
+      cards,
+      verify: req.user.id
+    });
+    const savedSet = await newSet.save();
+    res.status(201).json(savedSet);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// CARD ACTION
+//
 // ADD CARD
-
 router.post("/:set_id/addcard", verifySet, async (req, res) => {
-    try {
-      const addCard = await Set.findByIdAndUpdate(
-        req.params.set_id,
-        {
-          $push: {
-            "cards": req.body,
-          }
-        },
-        { new: true }
-      );
-      res.status(200).json(addCard);
-    } catch (err) {
-      res.status(500).json(err);
-    }
+  try {
+    const addCard = await Set.findByIdAndUpdate(
+      req.params.set_id,
+      {
+        $push: {
+          "cards": req.body,
+        }
+      },
+      { new: true }
+    );
+    res.status(200).json(addCard);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // EDIT CARD
@@ -99,7 +190,6 @@ router.put("/:set_id/editcard/:id", verifySet, async (req, res) => {
           },
           { new: true}
         );
-        console.log(newEditCard)
         res.status(200).json(newEditCard);
       } catch (err) {
         res.status(500).json(err);
@@ -133,34 +223,5 @@ router.delete("/:set_id/deletecard/:id", verifySet, async (req, res) => {
 
 
 
-//GET COLLECTION BY ID FOR USER
-// router.get("/find/:id", verifySet, async (req, res) => {
-//   try {
-//     const collections = await Collection.findById(req.params.id);
-//     res.status(200).json(collections);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-//
-// //GET ALL COLLECTION FOR USER
-// router.get("/mycollections", verifyToken, async (req, res) => {
-//   try {
-//     const collections = await Collection.find({ verify: req.user.id });
-//     res.status(200).json(collections);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-//
-// //GET COLLECTION PUBLIC
-// router.get("/", verifyToken, async (req, res) => {
-//   try {
-//     const collections = await Collection.find({ shared: true });
-//     res.status(200).json(collections);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 module.exports = router;

@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 // const Card = require("../models/Card");
 const Set = require("../models/Set")
-const Namespace = require("../models/Namespace")
 
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.token;
@@ -31,26 +30,6 @@ const verifyTokenAndAuthorization = (req, res, next) => {
   });
 };
 
-// const verifyCard = (req, res, next) => {
-//   verifyToken(req, res, async () => {
-//     let FindUser = await User.findOne({ _id: req.user.id });
-//
-//     // Check user
-//     if (FindUser !== null) {
-//       const cards = await Card.findOne({ verify: req.user.id, _id: req.params.id });
-//
-//       // Check Document with user id
-//       if (cards === null) {
-//         return res.status(403).json("You are not Author/Admin to do that!");
-//       } else {
-//         next();
-//       }
-//     } else {
-//       return res.status(403).json("You are not allowed to do that!");
-//     }
-//   });
-// };
-
 const verifySet = (req, res, next) => {
   verifyToken(req, res, async () => {
     let FindUser = await User.findOne({ _id: req.user.id });
@@ -71,31 +50,9 @@ const verifySet = (req, res, next) => {
   })
 };
 
-const verifyNamespace = (req, res, next) => {
-  verifyToken(req, res, async () => {
-    let FindUser = await User.findOne({ _id: req.user.id });
-
-    //Check User
-    if (FindUser !== null) {
-      const namespaces = await Namespace.findOne({ verify: req.user.id, _id: req.params.id });
-
-      //Check Collection with user id
-      if (namespaces === null) {
-        return res.status(403).json("You are not Author/Admin to do that");
-      } else {
-        next();
-      }
-    } else {
-      return res.status(403).json("You are not allowed to do that")
-    }
-  })
-};
-
 
 module.exports = {
   verifyToken,
   verifyTokenAndAuthorization,
-  // verifyCard,
-  verifySet,
-  verifyNamespace
+  verifySet
 };
