@@ -1,12 +1,15 @@
 const User = require("../models/User");
+const Set = require("../models/Set");
+
 const {
   verifyToken,
+  verifySet,
   verifyTokenAndAuthorization,
-} = require("./verifyToken");
+} = require("../middleware/verifyToken");
 
 const router = require("express").Router();
 const CryptoJS = require("crypto-js");
-const { findOne } = require("../models/User");
+
 //UPDATE
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
   if (req.body.password) {
@@ -40,55 +43,37 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
-// //GET USER
-// router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
-//   try {
-//     const user = await User.findById(req.params.id);
-//     const { password, ...others } = user._doc;
-//     res.status(200).json(others);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+//GET RESULT
+router.get("/result/:id", verifyToken, async (req, res) => {
+  try {
+    const sets = await Set.find({ verify: req.params.id });
 
-// //GET ALL USER
-// router.get("/", verifyTokenAndAdmin, async (req, res) => {
-//   const query = req.query.new;
-//   try {
-//     const users = query
-//       ? await User.find().sort({ _id: -1 }).limit(5)
-//       : await User.find();
-//     res.status(200).json(users);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+    let cardTotal = 0;
+    let reviewTotal = 0;
+    let noReviewTotal = 0;
 
-// //GET USER STATS
+    for (let i in sets){
+      for (let j in sets[i].cards){
+        cardTotal++;
+        if (sets[i].cards[j].level === 3){
+          noReviewTotal++;
+        }
+        if(sets[i].cards[j].level !== 0 && sets[i].cards[j].level !== 3) {
+          reviewTotal++;
+        }
+      }
+    }
 
-// router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
-//   const date = new Date();
-//   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+    const result = {
+      "cardTotal": cardTotal,
+      "reviewTotal": reviewTotal,
+      "noReviewTotal": noReviewTotal,
+    }
 
-//   try {
-//     const data = await User.aggregate([
-//       { $match: { createdAt: { $gte: lastYear } } },
-//       {
-//         $project: {
-//           month: { $month: "$createdAt" },
-//         },
-//       },
-//       {
-//         $group: {
-//           _id: "$month",
-//           total: { $sum: 1 },
-//         },
-//       },
-//     ]);
-//     res.status(200).json(data)
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;

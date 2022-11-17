@@ -4,8 +4,9 @@ const mongoose = require("mongoose");
 const CardSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
+    desc: { type: String, require: true},
     img: { type: String, require: true },
-    level: { type: Number, default: 3},
+    level: { type: Number, default: 0},
   },
   {timestamps: true}
 );
@@ -24,7 +25,7 @@ const SetSchema = new mongoose.Schema(
   {
     title: { type: String, required: true, unique: true },
     desc: { type: String, require: true },
-    classify: { type: String, require: true },
+    classify: { type: [String], require: true },
     uploadBy: { type: String },
     rating: {type: RatingSchema },
     shared: { type: Boolean, require: true, default: false},

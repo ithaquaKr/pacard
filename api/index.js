@@ -8,7 +8,6 @@ const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 // const cardRoute = require("./routes/cards");
 const setRoute = require("./routes/sets");
-const namespaceRoute = require("./routes/namespaces");
 
 const connectDB = async () => {
 	try {
@@ -33,7 +32,6 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 // app.use("/api/cards", cardRoute);
 app.use("/api/sets", setRoute);
-app.use("/api/namespaces", namespaceRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`Backend server is running on PORT: ${process.env.PORT}!`);

@@ -5,7 +5,7 @@ const Set = require("../models/Set");
 const {
   verifyToken,
   verifySet,
-} = require("./verifyToken");
+} = require("../middleware/verifyToken");
 
 
 // SETS ACTIONS
@@ -93,7 +93,7 @@ router.get("/library/:id", verifyToken, async (req, res) => {
 });
 
 // GET ALL SETS PUBLIC
-router.get("/library/", verifyToken, async (req, res) => {
+router.get("/library", verifyToken, async (req, res) => {
   try {
     const sets = await Set.find({ shared: true });
     res.status(200).json(sets);
@@ -102,25 +102,17 @@ router.get("/library/", verifyToken, async (req, res) => {
   }
 });
 
-// VOTE STAR
-router.put("/:set_id/vote", verifyToken, async(req, res) => {
+// GET SETS BY TAGS
+
+router.get("/tags", verifyToken, async (req, res) => {
   try {
-    const setVote = await Set.findOne({"_id": req.params.set_id});
-    const newVoteTotal = setVote.rating.voteTotal + 1;
-    const newStar = Math.round((setVote.rating.star * setVote.rating.voteTotal + req.body.star)/newVoteTotal);
-    console.log(newVoteTotal);
-    console.log(newStar);
-    const newRating = await Set.findByIdAndUpdate(
-      {"_id": req.params.set_id},
-      {
-        $set: {
-          "rating.voteTotal": newVoteTotal,
-          "rating.star": newStar
-        }
-      },
-      { new: true}
-    );
-    res.status(200).json(newRating);
+    const tags = req.body.classify;
+    let sets = [];
+    for (let i in tags){
+      const tmp = await Set.find({ classify: tags[i], shared: true});
+      sets = sets.concat(tmp);
+    }
+    res.status(200).json(sets);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -148,6 +140,32 @@ router.post("/:set_id/addset", verifyToken, async(req, res) =>{
     });
     const savedSet = await newSet.save();
     res.status(201).json(savedSet);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// EXT ACTION
+//
+// VOTE STAR
+router.put("/:set_id/vote", verifyToken, async(req, res) => {
+  try {
+    const setVote = await Set.findOne({"_id": req.params.set_id});
+    const newVoteTotal = setVote.rating.voteTotal + 1;
+    const newStar = Math.round((setVote.rating.star * setVote.rating.voteTotal + req.body.star)/newVoteTotal);
+    console.log(newVoteTotal);
+    console.log(newStar);
+    const newRating = await Set.findByIdAndUpdate(
+      {"_id": req.params.set_id},
+      {
+        $set: {
+          "rating.voteTotal": newVoteTotal,
+          "rating.star": newStar
+        }
+      },
+      { new: true}
+    );
+    res.status(200).json(newRating);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -219,9 +237,28 @@ router.delete("/:set_id/deletecard/:id", verifySet, async (req, res) => {
     }
 });
 
-// GET CARDS
+// GET CARDS TO LEARN
+router.get("/:set_id/learn", verifyToken, async (req, res) => {
+  try {
+    const sets = await Set.findOne({ "_id": req.params.set_id });
+    res.status(200).json(sets.cards)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+});
 
-
-
+// GET CARDS TO REVIEW
+router.get("/review", verifyToken, async (req, res) => {
+  try {
+    const sets = await Set.find({ verify: req.user.id});
+    let cardsReview = [];
+    for (let i in sets) {
+      cardsReview = cardsReview.concat(sets[i].cards)
+    }
+    res.status(200).json(cardsReview);
+  } catch (err) {
+    res.status(500).json(err)
+  }
+});
 
 module.exports = router;
