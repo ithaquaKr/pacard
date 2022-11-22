@@ -7,7 +7,6 @@ const {
   verifySet,
 } = require("../middleware/verifyToken");
 
-
 // SETS ACTIONS
 //
 // CREATE SETS
@@ -119,7 +118,7 @@ router.get("/tags", verifyToken, async (req, res) => {
 });
 
 // ADD TO MY SETS LIST
-router.post("/:set_id/addset", verifyToken, async(req, res) =>{
+router.post("/:set_id/addSet", verifyToken, async(req, res) =>{
   try {
     const addSet = await Set.findOne({"_id": req.params.set_id});
     const newTitle = addSet.title + " clone by " + req.user.username
@@ -174,7 +173,7 @@ router.put("/:set_id/vote", verifyToken, async(req, res) => {
 // CARD ACTION
 //
 // ADD CARD
-router.post("/:set_id/addcard", verifySet, async (req, res) => {
+router.post("/:set_id/addCard", verifySet, async (req, res) => {
   try {
     const addCard = await Set.findByIdAndUpdate(
       req.params.set_id,
@@ -192,7 +191,7 @@ router.post("/:set_id/addcard", verifySet, async (req, res) => {
 });
 
 // EDIT CARD
-router.put("/:set_id/editcard/:id", verifySet, async (req, res) => {
+router.put("/:set_id/editCard/:id", verifySet, async (req, res) => {
   const MySet = await Set.findOne({ _id: req.params.set_id });
     if (MySet !== null) {
       try {
@@ -200,8 +199,8 @@ router.put("/:set_id/editcard/:id", verifySet, async (req, res) => {
           {"_id": req.params.set_id, "cards._id": req.params.id},
           {
             $set: {
-              "cards.$.title": req.body.title,
-              "cards.$.question": req.body.question,
+              "cards.$.front": req.body.front,
+              "cards.$.back": req.body.back,
               "cards.$.img": req.body.img,
               "cards.$.level": req.body.level
             }
@@ -218,7 +217,7 @@ router.put("/:set_id/editcard/:id", verifySet, async (req, res) => {
 });
 
 // DELETE CARD
-router.delete("/:set_id/deletecard/:id", verifySet, async (req, res) => {
+router.delete("/:set_id/deleteCard/:id", verifySet, async (req, res) => {
     try {
       // const MySet = await Set.findOne({ _id: req.params.set_id });
       await Set.findOneAndUpdate(

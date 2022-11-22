@@ -14,25 +14,25 @@ import {
   getCardsSuccess,
 } from "./CardActions";
 
-export const getCards = async (dispatch) => {
-  dispatch(getCardsStart());
-  try {
-    const res = await axios.get("/api/cards", {
-      headers: {
-        token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-      },
-    });
-    dispatch(getCardsSuccess(res.data));
-  } catch (err) {
-    dispatch(getCardsFailure());
-  }
-};
+// export const getCards = async (dispatch) => {
+//   dispatch(getCardsStart());
+//   try {
+//     const res = await axios.get("/api/cardItem", {
+//       headers: {
+//         token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+//       },
+//     });
+//     dispatch(getCardsSuccess(res.data));
+//   } catch (err) {
+//     dispatch(getCardsFailure());
+//   }
+// };
 
 //create
-export const createCard = async (card, dispatch) => {
+export const createCard = async (set_id, cards, dispatch) => {
   dispatch(createCardStart());
   try {
-    const res = await axios.post("/api/cards", card, {
+    const res = await axios.post("/api/sets/"+ set_id + "/addCard", cards, {
       headers: {
         token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
       },

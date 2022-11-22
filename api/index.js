@@ -6,13 +6,13 @@ const cors = require('cors');
 dotenv.config();
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
-// const cardRoute = require("./routes/cards");
+// const cardRoute = require("./routes/cardItem");
 const setRoute = require("./routes/sets");
 
 const connectDB = async () => {
 	try {
 		await mongoose.connect(
-			`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.vqezmzc.mongodb.net/?retryWrites=true&w=majority`,
+			`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.omvmasw.mongodb.net/?retryWrites=true&w=majority`,
 			{
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
@@ -26,11 +26,12 @@ const connectDB = async () => {
 };
 
 connectDB();
+
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
-// app.use("/api/cards", cardRoute);
+// app.use("/api/cardItem", cardRoute);
 app.use("/api/sets", setRoute);
 
 app.listen(process.env.PORT, () => {

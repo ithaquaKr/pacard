@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 // SubDocuments
 const CardSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true },
-    desc: { type: String, require: true},
+    front: { type: String, required: true },
+    back: { type: String, require: true},
     img: { type: String, require: true },
     level: { type: Number, default: 0},
   },

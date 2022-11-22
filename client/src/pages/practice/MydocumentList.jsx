@@ -5,11 +5,11 @@ import { DataGrid } from '@mui/x-data-grid';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 // import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { DocumentContext } from "../../context/documentContext/DocumentContext";
-import { deleteDocument, getMyDocuments} from "../../context/documentContext/apiCalls";
+import { SetContext } from "../../context/setContext/SetContext";
+import { deleteDocument, getMyDocuments} from "../../context/setContext/apiCalls";
 
 // Import new document tab
-import Newdocs from "../../components/newdocs/Newdocs"
+import AddCard from "../../components/addCard/AddCard.jsx"
 
 // Import info tab
 import Infotab from "../../components/infotab/Infotab";
@@ -30,7 +30,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 export default function MydocumentList() {
-  const { documents, dispatch } = useContext(DocumentContext);
+  const { documents, dispatch } = useContext(SetContext);
   // const verify = JSON.parse(window.localStorage.getItem('user'))._id;
 
   const [open, setOpen] = React.useState(false);
@@ -78,7 +78,7 @@ export default function MydocumentList() {
     { field: "year", headerName: "Year", width: 100 ,editable: true,
     sortable: true,
     filterable: true,},
-    
+
     {
       field: "action",
       headerName: "Action",
@@ -121,7 +121,7 @@ export default function MydocumentList() {
     },
   ];
 
-  
+
   return (
     <div className="mydocument">
       <div className="mydocument-container">
@@ -134,19 +134,19 @@ export default function MydocumentList() {
         <div className="new-document">
           {/* <Link to="/newDocument">
           </Link> */}
-          <Newdocs/>
+          <AddCard/>
       </div>
         <div className="library-bottom">
           <div className="datatable-data">
             <DataGrid
               rows={documents}
-              disableSelectionOnClick 
+              disableSelectionOnClick
               columns={columns}
               pageSize={15}
               rowsPerPageOptions={[5,10,15]}
               checkboxSelection
               getRowId={(e) => e._id}
-              rowHeight={80} 
+              rowHeight={80}
             />
           </div>
         </div>

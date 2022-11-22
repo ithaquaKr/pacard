@@ -3,8 +3,8 @@ import { DataGrid } from '@mui/x-data-grid';
 // import { useContext, useEffect, useState } from "react";
 import { useContext, useEffect } from "react";
 
-import { DocumentContext } from "../../context/documentContext/DocumentContext";
-import { getDocuments} from "../../context/documentContext/apiCalls";
+import { SetContext } from "../../context/setContext/SetContext";
+import { getAllSetsPublic } from "../../context/setContext/apiCalls";
 
 // import { Document, Page,pdfjs } from 'react-pdf';
 
@@ -12,19 +12,19 @@ import { getDocuments} from "../../context/documentContext/apiCalls";
 import Infotab from "../../components/infotab/Infotab";
 
 // Import Read tab
-import Readdocs from "../../components/readdocs/Readdocs";
+// import Readdocs from "../../components/readdocs/Readdocs";
 
 export default function Library() {
-  const { documents, dispatch } = useContext(DocumentContext);
+  const { sets, dispatch } = useContext(SetContext);
   useEffect(() => {
-    getDocuments(dispatch);
+    getAllSetsPublic(dispatch);
   }, [dispatch]);
 
-  
+
   const columns = [
     {
-      field: "document",
-      headerName: "Name",
+      field: "title",
+      headerName: "Tên bộ thẻ",
       headerAlign: 'center',
       width: 200,
       editable: true,
@@ -38,19 +38,19 @@ export default function Library() {
         );
       },
     },
-    { field: "author", headerName: "Author", width: 120 ,editable: false,
+    { field: "desc", headerName: "Mô tả", width: 250 ,editable: false,
     sortable: true,
     filterable: true,},
-    { field: "classify", headerName: "Classify", width: 180 ,editable: false,
+    { field: "classify", headerName: "Chủ đề", width: 180 ,editable: false,
     sortable: true,
     filterable: true,},
-    { field: "year", headerName: "Year", width: 80 ,editable: false,
+    // { field: "year", headerName: "Year", width: 80 ,editable: false,
+    // sortable: true,
+    // filterable: true,},
+    { field: "uploadBy", headerName: "Người đăng", width: 100 ,editable: false,
     sortable: true,
     filterable: true,},
-    { field: "uploadby", headerName: "Upload By", width: 100 ,editable: false,
-    sortable: true,
-    filterable: true,},
-    
+
     {
       field: "action",
       headerName: "Action",
@@ -58,7 +58,7 @@ export default function Library() {
       renderCell: (params) => {
         return (
           <>
-            <Readdocs dataFromParent={params.row} />
+            {/*<Readdocs dataFromParent={params.row} />*/}
             <Infotab dataFromParent={params.row}/>
           </>
         );
@@ -66,7 +66,7 @@ export default function Library() {
     },
   ];
 
-  
+
   return (
     <div className="library-page">
       <div className="library-container">
@@ -79,15 +79,15 @@ export default function Library() {
         <div className="library-bottom">
           <div className="datatable-data">
             <DataGrid
-              rows={documents}
+              rows={sets}
               disableSelectionOnClick
               columns={columns}
               pageSize={15}
-              // checkboxSelection 
+              // checkboxSelection
               rowsPerPageOptions={[5,10,15]}
               getRowId={(e) => e._id}
-              // rowHeight={140} 
-              rowHeight={80} 
+              // rowHeight={140}
+              rowHeight={80}
               />
           </div>
         </div>

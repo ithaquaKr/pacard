@@ -1,5 +1,5 @@
 // import firebase from 'firebase/compat/app';
-// import 'firebase/storage';  
+// import 'firebase/storage';
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 // const firebaseConfig = {
@@ -20,7 +20,7 @@ const firebaseConfig = {
     appId: "1:1020141653299:web:9b7a188736fa0eb035c246",
     measurementId: "G-GGXPD6BW5J"
   };
-  
+
 // firebase.initializeApp(firebaseConfig);
 // const storage = firebase.storage();
 // export default storage;

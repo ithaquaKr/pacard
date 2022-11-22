@@ -33,6 +33,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 
 
 
@@ -43,14 +44,18 @@ export default function Account() {
   const {dispatch } = useContext(AuthContext);
 
   const history = useNavigate();
-
+  const metadata = {
+    contentType: 'image/jpeg'
+  };
   ///Update Avatar
   const [avatar, setAvatar] = useState(null);
   const [file, setFile] = useState(null);
   const upload = (items) => {
     items.forEach((item) => {
     const fileName = new Date().getTime() + item.label + item.file.name;
-    const uploadTask = storage.ref(`/avatar/${fileName}`).put(item.file);
+    // const uploadTask = storage.ref(`/avatar/${fileName}`).put(item.file);
+    const storageRef = ref(storage, `/avatar/${fileName}` + item.file);
+    const uploadTask = uploadBytesResumable(storageRef, file, metadata);
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -62,7 +67,7 @@ export default function Account() {
         alert(error)
       },
       () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           setAvatar(url);
         });
       }
@@ -216,8 +221,8 @@ export default function Account() {
               <div className="avatar-field">
                 <img src={JSON.parse(window.localStorage.getItem('user')).avatar} alt="" className="avatar-img"/>
                 <input type="file" name="file" onChange={(e) => setFile(e.target.files[0])}/>
-                {!avatar?                 
-                <input type="button" className="btn-upload-ava" defaultValue="Upload" onClick={handleUploadAvatar}/>: 
+                {!avatar?
+                <input type="button" className="btn-upload-ava" defaultValue="Upload" onClick={handleUploadAvatar}/>:
                 <input type="button" className="btn-upload-ava-save" defaultValue="Save" onClick={handleUpdateAvatar}/>}
               </div>
               <div className="profile-field">
@@ -286,7 +291,7 @@ export default function Account() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography component={'span'}>  
+            <Typography component={'span'}>
             <div className="report-forms">
             <div className="report-field">
               <TextSnippetIcon className="icon-pas"/>
@@ -297,7 +302,7 @@ export default function Account() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-        
+
         <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}

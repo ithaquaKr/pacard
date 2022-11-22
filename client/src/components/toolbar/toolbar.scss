@@ -1,0 +1,91 @@
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200;300;400;500;600;700;800&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto" , sans-serif;
+}
+.toolbar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 50px;
+  background: #6c8efb;
+  padding: 6px 10px;
+  z-index: 99;
+  transition: all 0.5s ease;
+}
+
+.toolbar i{
+  color: #fff;
+  height: 30px;
+  min-width: 30px;
+  font-size: 28px;
+  text-align: center;
+  .icon{
+    height: 30px;
+  }
+}
+
+.toolbar .tool-list{
+  margin-top: 35px;
+  height: 75%;
+}
+.toolbar .tool-footer{
+  margin-top: 45px;
+
+}
+.toolbar li{
+  position: relative;
+  margin: 30px 0;
+  list-style: none;
+}
+
+.toolbar li .tooltip{
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 15px);
+  z-index: 3;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: 0s;
+}
+
+.toolbar li:hover .tooltip{
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.toolbar li a{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  background: #6c8efb;
+}
+.toolbar li a:hover{
+  background: #FFF;
+}
+
+.toolbar li a:hover .links_name,
+.toolbar li a:hover i{
+  transition: all 0.5s ease;
+  color: #53AFEE;
+}
+

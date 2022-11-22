@@ -1,12 +1,10 @@
 .home {
-    //display: flex;
-    //margin-top: 0px;
-    margin: 0;
-    padding: 0;
+    display: flex;
     box-sizing: border-box;
     .home-container {
-      position: relative;
+      position: static;
       width: 100%;
+      height: 100%;
       background-color: #E4E9F7;
       overflow: hidden;
 
@@ -19,16 +17,9 @@
         margin: 20px;
         margin-left: 5%;
         margin-top: 3%;
-        background-color: #1d1b31;
+        background-color: #6c8efb;
         border-radius: 45px;
         justify-content: baseline;
-        .home-info-img {
-          width: 108px;
-          height: 108px;
-          border-radius: 50%;
-          object-fit: cover;
-          margin-right: 20px;
-        }
 
         .home-info {
           margin-top: 10px;
@@ -39,10 +30,61 @@
           .home-info-items {
             width: 100%;
             margin-left: 15px;
-            // justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: bold;
+             //justify-content: space-between;
           }
         }
 
+      }
+      .home-bottom {
+        .datatable-data{
+            // height: 1100px;
+            height: 550px;
+            width: 75%;
+            // padding: 40px;
+            margin-left: 5%;
+            margin-top: 2%;
+        }
+
+
+        .documentListItem{
+            display: flex;
+            width: 450px;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+
+        }
+
+        .documentListEdit{
+            border: none;
+            border-radius: 10px;
+            padding: 5px 10px;
+            background-color: #3bb077;
+            color: white;
+            cursor: pointer;
+            margin-right: 20px;
+
+        }
+        .documentListRead{
+            border: none;
+            border-radius: 10px;
+            padding: 5px 10px;
+            background-color: #f1d13f;
+            color: white;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        .documentListDelete{
+            color: red;
+            cursor: pointer;
+        }
+        .read-document{
+            display: flex;
+            height: 96px;
+            align-self: center;
+        }
       }
 
     }

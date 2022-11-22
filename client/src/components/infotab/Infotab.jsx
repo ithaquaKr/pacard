@@ -24,7 +24,7 @@ const toggleDrawer = (anchor, open) => (event) => {
 
 const list = (anchor) => (
     <Box
-    sx={{ width: 300 }}
+    sx={{ width: 500 }}
     role="presentation"
     onClick={toggleDrawer(anchor, false)}
     onKeyDown={toggleDrawer(anchor, false)}
@@ -33,33 +33,26 @@ const list = (anchor) => (
       <div className="item-top">
         <InfoIcon className="item-icon"/>
           <div className="item-title">
-            Infomation
+            Thông tin thẻ
           </div>
       </div>
       <div className="item-bottom">
         <div className="item-info">
-            <div className="info-key">Title:</div>
+            <div className="info-key">Tên thẻ:</div>
             <span className="info-value">{props.dataFromParent.title}</span>
         </div>
         <div className="item-info">
-            <span className="info-key">Author:</span>
-            <span className="info-value">{props.dataFromParent.author}</span>
-        </div>
-        <div className="item-info">
-            <span className="info-key">Year:</span>
-            <span className="info-value">{props.dataFromParent.year}</span>
-        </div>
-        <div className="item-info">
-            <span className="info-key">Classify:</span>
-            <span className="info-value">{props.dataFromParent.classify}</span>
-        </div>
-        <div className="item-info">
-            <span className="info-key">Description:</span>
+            <span className="info-key">Mô tả:</span>
             <span className="info-value">{props.dataFromParent.desc}</span>
         </div>
         <div className="item-info">
-            <span className="info-key">Upload By:</span>
-            <span className="info-value">{props.dataFromParent.uploadby}</span>
+            <span className="info-key">Cấp độ:</span>
+            <span className="info-value">{props.dataFromParent.level}</span>
+        </div>
+          <div className="item-info">
+            <span className="info-key">Hình ảnh:</span>
+            <img src = {props.dataFromParent.img} alt=""/>
+            {/*<span className="info-value">{props.dataFromParent.img}</span>*/}
         </div>
       </div>
     </div>
@@ -71,7 +64,7 @@ return (
     {['right'].map((anchor) => (
         <React.Fragment key={anchor}>
         <button className="documentListEdit" onClick={toggleDrawer(anchor, true)}>
-            Info
+            Chi tiết
         </button>
         <SwipeableDrawer
             anchor={anchor}

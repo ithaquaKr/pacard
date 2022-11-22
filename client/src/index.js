@@ -3,17 +3,17 @@ import ReactDOM from "react-dom";
 
 import App from "./App";
 import { AuthContextProvider } from "./context/authContext/AuthContext";
-import { DocumentContextProvider } from "./context/documentContext/DocumentContext";
+import { SetContextProvider } from "./context/setContext/SetContext";
 import { CardContextProvider } from "./context/cardContext/CardContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <DocumentContextProvider>
+      <SetContextProvider>
         <CardContextProvider>
           <App/>
         </CardContextProvider>
-      </DocumentContextProvider>
+      </SetContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -10,7 +10,7 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 
 import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { AuthContext } from "../../context/authContext/AuthContext";
+import { AuthContext } from "../../client/src/context/authContext/AuthContext";
 // import { logout } from "../../context/authContext/AuthActions";
 
 
@@ -51,7 +51,7 @@ const Sidebar = () => {
     <div className="sidebar">
 
       <div className="logo-details">
-        <img src="/images/logo.svg" alt="" />
+        <img src="/client/public/images/logo.svg" alt="" />
           <Link to="/home" style={{ textDecoration: "none" }} className = "logo_name">
             <div className="logo_name">PACARD</div>
           </Link>

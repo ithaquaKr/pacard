@@ -2,10 +2,10 @@ import * as React from 'react';
 
 
 import { useContext, useState } from "react";
-import { createTodo } from "../../context/cardContext/apiCalls";
-import { CardContext } from "../../context/cardContext/CardContext";
+import { createSet } from "../../context/setContext/apiCalls";
+import { SetContext } from "../../context/setContext/SetContext";
 
-import "./newtask.scss"
+import "./createSet.scss"
 
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
@@ -19,23 +19,33 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import MenuItem from '@mui/material/MenuItem';
 
-const statusOption = [
-    {
-        value: 'TO LEARN',
-        label: 'TO LEARN',
-    },
-    {
-        value: 'LEARNING',
-        label: 'LEARNING',
-    },
-    {
-        value: 'LEARNED',
-        label: 'LEARNED',
-    },
-  ];
+const ClassifyOption = [
+  {
+    value: 'Động vật',
+    label: 'Động vật',
+  },
+  {
+    value: 'Con người',
+    label: 'Con người',
+  },
+  {
+    value: 'Âm nhạc',
+    label: 'Âm nhạc',
+  },
+];
 
+const SharedOption = [
+  {
+    value: true,
+    label: 'Công khai'
+  },
+  {
+    value: false,
+    label: 'Riêng tư'
+  }
+]
 
-export default function Newtask() {
+export default function CreateSet() {
 
     // Dialog function
     const [open, setOpen] = React.useState(false);
@@ -49,20 +59,20 @@ export default function Newtask() {
      };
 
     // Create new task
-    const [todo, setTodo] = useState(null);
+    const [set, setSet] = useState(null);
 
-    const { dispatch } = useContext(CardContext);
+    const { dispatch } = useContext(SetContext);
 
     const handleChange = (e) => {
       const value = e.target.value;
-      setTodo({ ...todo, [e.target.name]: value });
+      setSet({ ...set, [e.target.name]: value });
     };
 
 
     const handleSubmit = (e) => {
       e.preventDefault();
       try {
-        createTodo(todo, dispatch);
+        createSet(set, dispatch);
         setOpen(false);
       } catch (err) {
       }
@@ -71,17 +81,17 @@ export default function Newtask() {
 
   return (
     <div>
-      <Button onClick={handleClickOpen} sx={{color: 'green'}} endIcon={<AddCircleIcon sx={{ height: 54, width: 54, }} />} ></Button>
+      <Button onClick={handleClickOpen} sx={{color: 'green'}} endIcon={<AddCircleIcon sx={{ height: 24, width: 24, }} />} ></Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Create Task</DialogTitle>
+        <DialogTitle>Tạo bộ thẻ</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Enter the infomation about your task to note it~!
+            Vui lòng nhập đầy đủ các thông tin dưới đây để tạo bộ thẻ của bạn.!
           </DialogContentText>
           <TextField
             margin="normal"
             id="outlined-basic"
-            label="Title"
+            label="Tiêu đề"
             type="text"
             name='title'
             fullWidth
@@ -90,9 +100,9 @@ export default function Newtask() {
           <TextField
             margin="normal"
             id="outlined-textarea"
-            label="Infomation"
+            label="Mô tả"
             type="text"
-            name='info'
+            name='desc'
             onChange={handleChange}
             fullWidth
             multiline
@@ -100,15 +110,32 @@ export default function Newtask() {
           <TextField
             id="outlined-select"
             select
-            label="Status"
-            name='status'
+            label="Chủ đề"
+            name='classify'
             onChange={handleChange}
             defaultValue=''
-            helperText="Please select your task status!"
+            helperText="Vui lòng chọn chủ đề của bộ thẻ!"
             margin="normal"
             fullWidth
             >
-            {statusOption.map((option) => (
+            {ClassifyOption.map((option) => (
+                <MenuItem key={option.value} value={option.value} >
+                {option.label}
+                </MenuItem>
+            ))}
+            </TextField>
+          <TextField
+            id="outlined-select"
+            select
+            label="Chia sẻ"
+            name='shared'
+            onChange={handleChange}
+            defaultValue=''
+            helperText="Bạn có muốn chia sẻ bộ thẻ của mình cho mọi người"
+            margin="normal"
+            fullWidth
+            >
+            {SharedOption.map((option) => (
                 <MenuItem key={option.value} value={option.value} >
                 {option.label}
                 </MenuItem>
@@ -116,8 +143,8 @@ export default function Newtask() {
             </TextField>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} sx={{color: 'red'}}>Cancel</Button>
-          <Button onClick={handleSubmit} sx={{color: 'green'}}>Create</Button>
+          <Button onClick={handleClose} sx={{color: 'red'}}>Hủy</Button>
+          <Button onClick={handleSubmit} sx={{color: 'green'}}>Tạo</Button>
         </DialogActions>
       </Dialog>
     </div>
